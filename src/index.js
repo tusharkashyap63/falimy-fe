@@ -1,25 +1,15 @@
-import { ColorModeScript } from '@chakra-ui/react';
-import { ChakraProvider, extendTheme } from '@chakra-ui/react';
 import React, { StrictMode } from 'react';
 import ReactDOM from 'react-dom';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { ReactQueryDevtools } from 'react-query/devtools';
+import { ColorModeScript } from '@chakra-ui/react';
+import { ChakraProvider } from '@chakra-ui/react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import Auth0ProviderWithHistory from './Auth0ProviderWithHistory';
 import App from './App';
+import customTheme from './theme';
 
-const customTheme = extendTheme({
-  colors: {
-    brand: {
-      500: '#6C79D9',
-    },
-  },
-  styles: {
-    global: {
-      body: {
-        fontFamily: 'Poppins, sans-serif',
-      },
-    },
-  },
-});
+const queryClient = new QueryClient();
 
 ReactDOM.render(
   <StrictMode>
@@ -27,7 +17,10 @@ ReactDOM.render(
     <Router>
       <Auth0ProviderWithHistory>
         <ChakraProvider theme={customTheme}>
-          <App />
+          <QueryClientProvider client={queryClient}>
+            <App />
+            <ReactQueryDevtools />
+          </QueryClientProvider>
         </ChakraProvider>
       </Auth0ProviderWithHistory>
     </Router>

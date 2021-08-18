@@ -24,6 +24,9 @@ export default function Navbar() {
         onClick={() => {
           loginWithRedirect({
             screen_hint: 'signup',
+            appState: {
+              returnTo: '/new/1',
+            },
           });
         }}
       >

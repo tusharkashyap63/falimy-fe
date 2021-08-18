@@ -44,6 +44,9 @@ export default function Header() {
           onClick={() => {
             loginWithRedirect({
               screen_hint: 'signup',
+              appState: {
+                returnTo: '/new/1',
+              },
             });
           }}
         >
