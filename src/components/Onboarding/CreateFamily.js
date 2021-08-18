@@ -6,12 +6,14 @@ import {
   Input,
   Spacer,
 } from '@chakra-ui/react';
-import React, { useState } from 'react';
+import { useState, useContext } from 'react';
 import { useMutation } from 'react-query';
+import UserContext from '../../context/UserContext';
 import { createFamily } from '../../network/lib/families';
 
 export default function CreateFamily({ goToPrevStep }) {
   const [name, setName] = useState('');
+  const { user } = useContext(UserContext);
   const { isLoading, mutate } = useMutation(createFamily);
 
   const handleSubmit = async e => {
@@ -19,7 +21,7 @@ export default function CreateFamily({ goToPrevStep }) {
 
     const familyData = {
       name,
-      head: '611cd191cde234383892ed7f',
+      head: user._id,
     };
 
     mutate(familyData);

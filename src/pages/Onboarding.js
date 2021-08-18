@@ -8,7 +8,7 @@ import UsernameForm from '../components/Onboarding/UsernameForm';
 import useSteps from '../hooks/useSteps';
 
 export default function Onboarding() {
-  const { step, goToNextStep, goToPrevStep } = useSteps(1, 3);
+  const { step, goToNextStep, goToPrevStep } = useSteps(2, 2);
   const [choice, setChoice] = useState('');
 
   const renderAccToStep = () => {
