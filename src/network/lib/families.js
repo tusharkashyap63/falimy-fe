@@ -7,7 +7,5 @@ export function createFamily(userData) {
 }
 
 export function getFamilies(userId) {
-  return httpClient.client
-    .get('/families', { params: { id: userId } })
-    .then(res => res.data);
+  return httpClient.client.get(`/families/${userId}`).then(res => res.data);
 }
