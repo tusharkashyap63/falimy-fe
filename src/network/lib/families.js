@@ -5,3 +5,9 @@ export function createFamily(userData) {
     .post('/families', JSON.stringify(userData))
     .then(res => res.data);
 }
+
+export function getFamilies(userId) {
+  return httpClient.client
+    .get('/families', { params: { id: userId } })
+    .then(res => res.data);
+}

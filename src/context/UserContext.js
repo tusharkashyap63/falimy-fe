@@ -7,9 +7,11 @@ const UserContext = createContext();
 
 export function UserProvider({ children }) {
   const [user, setUser] = useState(null);
+  const [userLoading, setUserLoading] = useState(false);
   const { getAccessTokenSilently } = useAuth0();
 
   useEffect(() => {
+    setUserLoading(true);
     getAccessTokenSilently().then(token => {
       axios
         .get(`${serverUrl}/users`, {
@@ -17,12 +19,15 @@ export function UserProvider({ children }) {
             Authorization: `Bearer ${token}`,
           },
         })
-        .then(res => setUser(res.data))
+        .then(res => {
+          setUser(res.data);
+          setUserLoading(false);
+        })
         .catch(err => console.error(err));
     });
   }, [getAccessTokenSilently]);
 
-  const value = { user };
+  const value = { user, userLoading };
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 }
 

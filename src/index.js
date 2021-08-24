@@ -6,6 +6,7 @@ import { ColorModeScript } from '@chakra-ui/react';
 import { ChakraProvider } from '@chakra-ui/react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import Auth0ProviderWithHistory from './Auth0ProviderWithHistory';
+import { UserProvider } from './context/UserContext';
 import App from './App';
 import customTheme from './theme';
 
@@ -18,7 +19,9 @@ ReactDOM.render(
       <Auth0ProviderWithHistory>
         <ChakraProvider theme={customTheme}>
           <QueryClientProvider client={queryClient}>
-            <App />
+            <UserProvider>
+              <App />
+            </UserProvider>
             <ReactQueryDevtools />
           </QueryClientProvider>
         </ChakraProvider>
